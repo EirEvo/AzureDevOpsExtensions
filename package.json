@@ -2,7 +2,7 @@
   "name": "azure-devops-helloworld-widget",
   "version": "1.0.0",
   "description": "A simple HelloWorld widget for Azure DevOps",
-  "main": "index.js",
+  "main": "src/index.tsx",
   "scripts": {
     "build": "webpack --mode production",
     "start": "webpack-dev-server --open"
