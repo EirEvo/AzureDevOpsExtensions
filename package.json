@@ -1,5 +1,29 @@
 {
+  "name": "azure-devops-helloworld-widget",
+  "version": "1.0.0",
+  "description": "A simple HelloWorld widget for Azure DevOps",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack --watch"
+  },
   "dependencies": {
-    "aider": "^1.0.1"
+    "aider": "^1.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "azure-devops-extension-sdk": "^5.0.0",
+    "azure-devops-ui": "^0.0.1",
+    "azure-devops-extension-api": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "typescript": "^4.2.4",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "babel-loader": "^8.2.2",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0"
   }
 }
