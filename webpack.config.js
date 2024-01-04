@@ -21,8 +21,12 @@ module.exports = {
         publicPath: '/',
     },
     devServer: {
-        contentBase: path.join(__dirname, '/'),
-        publicPath: '/',
+        static: {
+            directory: path.join(__dirname, '/'),
+        },
+        devMiddleware: {
+            publicPath: '/',
+        },
         compress: true,
         port: 9000
     },
