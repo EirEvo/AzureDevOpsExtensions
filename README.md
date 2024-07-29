@@ -2,7 +2,7 @@
 
 The Harvest Work Hours Monitor is an Azure DevOps dashboard widget that visualizes billable, internal (non-billable), and R&D hours logged through the Harvest app. This widget helps teams efficiently track and manage time spent on various project categories.
 
-![image](![alt text](image-1.png))
+![alt text](image-1.png)
 
 
 ## Features
@@ -19,7 +19,7 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 - **Authorization Token**: A personal access token necessary for authenticating requests to the Harvest API.
 - **Display Mode**: Choose between displaying data as a percentage or in absolute hours.
 
-![image](![alt text](image-2.png))
+![alt text](image-2.png)
 
 
 ## Installation and Setup
