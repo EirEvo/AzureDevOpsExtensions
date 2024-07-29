@@ -1,30 +1,42 @@
-Harvest Work Hours Monitor
-The Harvest Work Hours Monitor is an Azure DevOps dashboard widget designed to visualize billable, internal (non-billable), and R&D hours logged through the Harvest app. This tool helps teams efficiently track and manage the time spent on various project categories.
+# Harvest Work Hours Monitor
 
-Features
+The Harvest Work Hours Monitor is an Azure DevOps dashboard widget that visualizes billable, internal (non-billable), and R&D hours logged through the Harvest app. This widget helps teams efficiently track and manage time spent on various project categories.
 
-Billable Hours: Displays hours chargeable to clients or projects, offering insights into revenue-generating activities.
-Internal Hours: Tracks hours for internal tasks like meetings, training, and administration, which is crucial for understanding resource allocation.
-R&D Hours: Captures hours spent on research and development projects. These hours are identified by a project code containing "R&D," regardless of whether they are billable or internal.
-Configuration
+![image](https://github.com/user-attachments/assets/6390ea03-1876-4c0c-9e11-74c17d834461)
 
-To configure the widget, click on the gear icon in the widget's header. You will need to provide:
 
-Harvest Account ID: Your unique account identifier for the Harvest app, required to fetch time entries.
-Authorization Token: A personal access token necessary for authenticating requests to the Harvest API.
-Display Mode: Choose between displaying data as a percentage or in absolute hours.
-Installation and Setup
+## Features
 
-Install the Widget: Download and install the Harvest Work Hours Monitor from the Azure DevOps Marketplace.
-Add to Dashboard: Drag and drop the widget onto your desired dashboard.
-Enter Configuration Details: Provide your Harvest Account ID and Authorization Token to enable data fetching.
-Customize Display Options: Select your preferred display mode to visualize the data effectively.
-Usage
+- **Billable Hours**: Displays hours that are chargeable to clients or projects, providing insight into revenue-generating activities.
+- **Internal Hours**: Tracks hours dedicated to internal tasks such as meetings, training, and administration, crucial for understanding resource allocation.
+- **R&D Hours**: Captures hours for research and development projects, identified by a project code containing "R&D", regardless of whether these hours are billable or internal.
 
-Once configured, the widget provides a real-time breakdown of hours spent on different types of work. This enables teams and managers to monitor resource utilization and focus, ensuring that project hours are correctly categorized and tracked.
+## Configuration
 
-Privacy and Access
+To configure the widget, click on the gear icon in the widget's header. You'll need to provide:
 
-This widget is a private tool intended only for use by organizations with explicit access. It is not publicly available and should not be redistributed without proper authorization. Ensure your organization complies with any sharing restrictions associated with this widget.
+- **Harvest Account ID**: This is your unique account identifier for the Harvest app, which is required to fetch time entries.
+- **Authorization Token**: A personal access token necessary for authenticating requests to the Harvest API.
+- **Display Mode**: Choose between displaying data as a percentage or in absolute hours.
 
-For further assistance or detailed documentation, please visit the GitHub page.
+![image](https://github.com/user-attachments/assets/1a19f106-d676-4217-a155-301add23d780)
+
+
+## Installation and Setup
+
+1. **Install the Widget**: Download and install the Harvest Work Hours Monitor from the Azure DevOps Marketplace.
+2. **Add to Dashboard**: Drag and drop the widget onto your desired dashboard.
+3. **Enter Configuration Details**: Provide your Harvest Account ID and Authorization Token to enable data fetching.
+4. **Customize Display Options**: Select your preferred display mode to visualize the data effectively.
+
+## Usage
+
+After configuration, the widget provides a real-time breakdown of hours spent on different types of work. This allows teams and managers to monitor resource utilization and focus, ensuring that project hours are appropriately categorized and tracked.
+
+## Privacy and Access
+
+This widget is a private tool intended for use only by organizations with which it has been explicitly shared. It is not available publicly and should not be redistributed without proper authorization. Ensure that your organization complies with any sharing restrictions associated with this widget.
+
+For further assistance or detailed documentation, please visit https://github.com/BogdanBrat/DevOpsWidgetHarvest/tree/main.
+
+---
