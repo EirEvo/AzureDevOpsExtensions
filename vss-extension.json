@@ -13,7 +13,8 @@
     "harvest",
     "time tracking",
     "dashboard",
-    "widget"
+    "widget",
+    "Internal"
   ],
   "repository": {
     "type": "git",
