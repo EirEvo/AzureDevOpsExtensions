@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "myExtensionsDevops",
-  "version": "1.1.1",
+  "version": "1.1.22",
   "name": "Harvest Work Hours Monitor",
   "description": "Displays hours from Harvest, providing detailed insights into time allocation for projects. The hours are categorized into billable hours, 'R&D' (Research & Development), and Internal hours.",
   "publisher": "EirEvoCreations",

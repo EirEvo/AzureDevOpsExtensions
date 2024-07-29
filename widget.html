@@ -12,7 +12,7 @@
         }
         .title {
             text-align: center;
-            font-size: 1.0em; /* Default font size */
+            font-size: 1.0em;
             margin-bottom: 0.3em;
         }
         .chart-container {
@@ -85,44 +85,6 @@
 
                                 var totalHours = billableHours + nonBillableHours + rAndDHours;
                                 var ctx = document.getElementById('hoursChart').getContext('2d');
-                                var chartOptions = {
-                                    responsive: true,
-                                    maintainAspectRatio: false,
-                                    plugins: {
-                                        legend: {
-                                            display: true,
-                                            position: 'bottom',
-                                        },
-                                        tooltip: {
-                                            callbacks: {
-                                                label: function (context) {
-                                                    let value = context.parsed;
-                                                    if (displayMode === "percentage") {
-                                                        let percentage = ((value / totalHours) * 100).toFixed(1);
-                                                        return ` ${percentage}%`;
-                                                    } else {
-                                                        return `${value.toFixed(1)} h`;
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        datalabels: {
-                                            color: '#fff',
-                                            formatter: (value) => {
-                                                if (displayMode === "percentage") {
-                                                    let percentage = ((value / totalHours) * 100).toFixed(1);
-                                                    return `${percentage}%`;
-                                                } else {
-                                                    return `${value.toFixed(1)} h`;
-                                                }
-                                            },
-                                            font: {
-                                                weight: 'bold',
-                                                size: 14 // Default size
-                                            }
-                                        }
-                                    }
-                                };
 
                                 var chart = new Chart(ctx, {
                                     type: 'doughnut',
@@ -133,7 +95,45 @@
                                             backgroundColor: ['#4ea72e', '#e97132', '#0f9ed5']
                                         }]
                                     },
-                                    options: chartOptions,
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            legend: {
+                                                display: true,
+                                                position: 'bottom',
+                                                onClick: null // Disable legend interaction
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function (context) {
+                                                        let value = context.parsed;
+                                                        if (displayMode === "percentage") {
+                                                            let percentage = ((value / totalHours) * 100).toFixed(1);
+                                                            return ` ${percentage}%`;
+                                                        } else {
+                                                            return `${value.toFixed(1)} h`;
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            datalabels: {
+                                                color: '#fff',
+                                                formatter: (value) => {
+                                                    if (displayMode === "percentage") {
+                                                        let percentage = ((value / totalHours) * 100).toFixed(1);
+                                                        return `${percentage}%`;
+                                                    } else {
+                                                        return `${value.toFixed(1)} h`;
+                                                    }
+                                                },
+                                                font: {
+                                                    weight: 'bold',
+                                                    size: 14 // Default size
+                                                }
+                                            }
+                                        }
+                                    },
                                     plugins: [ChartDataLabels, {
                                         beforeDraw: function(chart) {
                                             var width = chart.width,
@@ -181,20 +181,20 @@
             var width = widgetContainer.clientWidth;
             var height = widgetContainer.clientHeight;
 
-            if (size.rowSpan === 2 || size.columnSpan === 2) { // When either dimension is 2, keep the default size
-                title.style.fontSize = "1.0em"; // Default title font size
-                chart.options.plugins.datalabels.font.size = 12; // Default datalabels font size
-                widgetContainer.style.maxHeight = "280px"; // Default chart height
-            } else if (size.rowSpan === 3 && size.columnSpan === 3) { // 3x3 size detection
-                title.style.fontSize = "1.2em"; // Increase title font size
-                chart.options.plugins.datalabels.font.size = 16; // Increase datalabels font size
-                widgetContainer.style.maxHeight = "440px"; // Increase chart height
-            } else { // Handle other sizes
-                title.style.fontSize = "1.0em"; // Adjust title font size as needed
-                chart.options.plugins.datalabels.font.size = 12; // Adjust datalabels font size as needed
-                widgetContainer.style.maxHeight = "320px"; // Adjust chart height as needed
+            if (size.rowSpan === 2 || size.columnSpan === 2) {
+                title.style.fontSize = "1.0em";
+                chart.options.plugins.datalabels.font.size = 12;
+                widgetContainer.style.maxHeight = "280px";
+            } else if (size.rowSpan === 3 && size.columnSpan === 3) {
+                title.style.fontSize = "1.2em";
+                chart.options.plugins.datalabels.font.size = 16;
+                widgetContainer.style.maxHeight = "440px";
+            } else {
+                title.style.fontSize = "1.0em";
+                chart.options.plugins.datalabels.font.size = 12;
+                widgetContainer.style.maxHeight = "320px";
             }
-            chart.update(); // Apply changes to the chart
+            chart.update();
         }
     </script>
 </body>
