@@ -1,0 +1,93 @@
+{
+  "manifestVersion": 1,
+  "id": "myExtensionsDevops",
+  "version": "1.1.1",
+  "name": "Harvest Work Hours Monitor",
+  "description": "Displays hours from Harvest, providing detailed insights into time allocation for projects. The hours are categorized into billable hours, 'R&D' (Research & Development), and Internal hours.",
+  "publisher": "EirEvoCreations",
+  "categories": ["Azure Boards"],
+  "tags": [
+    "hours",
+    "billable",
+    "non-billable",
+    "harvest",
+    "time tracking",
+    "dashboard",
+    "widget"
+  ],
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/your-repo/BillableNonbillableWidget"
+  },
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "img/logo.png"
+  },
+  "demands": ["contribution/ms.vss-dashboards-web.widget-sdk-version-2"],
+  "contributions": [
+    {
+      "id": "HarvestHoursWidget",
+      "type": "ms.vss-dashboards-web.widget",
+      "targets": [
+        "ms.vss-dashboards-web.widget-catalog",
+        ".HarvestHoursWidget.Configuration"
+      ],
+      "properties": {
+        "name": "Harvest Hours Widget",
+        "isNameConfigurable": true,
+        "description": "A widget to display billable and non-billable hours from Harvest",
+        "catalogIconUrl": "img/preview.png",
+        "uri": "widget.html",
+        "supportedSizes": [
+          { "rowSpan": 2, "columnSpan": 2 },
+          { "rowSpan": 2, "columnSpan": 3 },
+          { "rowSpan": 3, "columnSpan": 2 },
+          { "rowSpan": 3, "columnSpan": 3 }
+        ],
+        "supportedScopes": ["project_team"]
+      }
+    },
+    {
+      "id": "HarvestHoursWidget.Configuration",
+      "type": "ms.vss-dashboards-web.widget-configuration",
+      "targets": ["ms.vss-dashboards-web.widget-configuration"],
+      "properties": {
+        "name": "Harvest Hours Widget Configuration",
+        "description": "Configures the Harvest Hours widget",
+        "uri": "widget-configuration.html"
+      }
+    }
+  ],
+  "files": [
+    {
+      "path": "widget.html",
+      "addressable": true
+    },
+    {
+      "path": "widget-configuration.html",
+      "addressable": true
+    },
+    {
+      "path": "sdk/scripts/VSS.SDK.min.js",
+      "addressable": true
+    },
+    {
+      "path": "img",
+      "addressable": true
+    },
+    {
+      "path": "scripts",
+      "addressable": true
+    }
+  ],
+  "scopes": [
+    "vso.build",
+    "vso.code",
+    "vso.identity",
+    "vso.test"
+  ]
+}
