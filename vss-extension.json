@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
-  "id": "myExtensionsDevops",
-  "version": "1.1.23",
-  "name": "Harvest Work Hours Monitor",
+  "id": "HarvestWidgets",
+  "version": "1.0.1",
+  "name": "Harvest Billing Widget",
   "description": "Displays hours from Harvest, providing detailed insights into time allocation for projects. The hours are categorized into billable hours, 'R&D' (Research & Development), and Internal hours.",
-  "publisher": "EirEvoCreations",
+  "publisher": "EirEvo-AzureDevOpsExtensions",
   "categories": ["Azure Boards"],
   "tags": [
     "hours",
@@ -14,12 +14,18 @@
     "time tracking",
     "dashboard",
     "widget",
-    "Internal"
+    "Internal",
+    "extension"
   ],
   "repository": {
     "type": "git",
     "uri": "https://github.com/BogdanBrat/DevOpsWidgetHarvestHours"
   },
+  "content": {
+        "details": {
+            "path": "docs/overview.md"
+        }
+    },
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"

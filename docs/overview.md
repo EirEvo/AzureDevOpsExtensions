@@ -1,9 +1,8 @@
-# Harvest Work Hours Monitor
+# Harvest Billing Widget
 
-The Harvest Work Hours Monitor is an Azure DevOps dashboard widget that visualizes billable, internal (non-billable), and R&D hours logged through the Harvest app. This widget helps teams efficiently track and manage time spent on various project categories.
+The Harvest Billing Widget is an Azure DevOps dashboard tool that visualizes billable, internal (non-billable), and R&D hours logged through the Harvest app. This widget helps teams efficiently track and manage time spent on various project categories.
 
-![alt text](docs/pie-chart.png)
-
+![Pie Chart](docs/pie-chart.png)
 
 ## Features
 
@@ -19,12 +18,22 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 - **Authorization Token**: A personal access token necessary for authenticating requests to the Harvest API.
 - **Display Mode**: Choose between displaying data as a percentage or in absolute hours.
 
-![alt text](docs/widget-configuration.png)
+### Obtaining Harvest Account ID and Authorization Token
 
+To get the necessary credentials:
+
+1. **Step 1**: Log in to your Harvest account.
+2. **Step 2**: Go to your profile by clicking your name in the upper right corner and select "My Profile".
+3. **Step 3**: Navigate to "Settings" -> "Security" -> "Go to Harvest ID security settings" -> "Developers".
+4. **Step 4**: Click "Create new personal access token" or use an existing token. Copy the generated token and account ID and store them securely.
+
+   ![Security Settings](docs/security-settings.png)
+
+![Widget Configuration](docs/widget-configuration.png)
 
 ## Installation and Setup
 
-1. **Install the Widget**: Download and install the Harvest Work Hours Monitor from the Azure DevOps Marketplace.
+1. **Install the Widget**: Download and install the Harvest Billing Widget from the Azure DevOps Marketplace.
 2. **Add to Dashboard**: Drag and drop the widget onto your desired dashboard.
 3. **Enter Configuration Details**: Provide your Harvest Account ID and Authorization Token to enable data fetching.
 4. **Customize Display Options**: Select your preferred display mode to visualize the data effectively.
@@ -33,10 +42,4 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 
 After configuration, the widget provides a real-time breakdown of hours spent on different types of work. This allows teams and managers to monitor resource utilization and focus, ensuring that project hours are appropriately categorized and tracked.
 
-## Privacy and Access 
-
-This widget is a private tool intended for use only by organizations with which it has been explicitly shared. It is not available publicly and should not be redistributed without proper authorization. Ensure that your organization complies with any sharing restrictions associated with this widget.
-
-For further assistance or detailed documentation, please visit https://github.com/BogdanBrat/DevOpsWidgetHarvestHours.
-
----
+For further assistance or detailed documentation, please visit [Harvest Billing Widget Documentation](https://github.com/BogdanBrat/DevOpsWidgetHarvestHours).
