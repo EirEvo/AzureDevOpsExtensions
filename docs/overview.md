@@ -17,6 +17,10 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 - **Harvest Account ID**: This is your unique account identifier for the Harvest app, which is required to fetch time entries.
 - **Authorization Token**: A personal access token necessary for authenticating requests to the Harvest API.
 - **Display Mode**: Choose between displaying data as a percentage or in absolute hours.
+- **Widget Title**: Customize the title displayed on the widget to suit your needs.
+- **Widget Size**: Adjust the size of the widget to fit your dashboard layout.
+
+![Widget Configuration](docs/widget-configuration.png)
 
 ### Obtaining Harvest Account ID and Authorization Token
 
@@ -29,14 +33,12 @@ To get the necessary credentials:
 
    ![Security Settings](docs/security-settings.png)
 
-![Widget Configuration](docs/widget-configuration.png)
-
 ## Installation and Setup
 
 1. **Install the Widget**: Download and install the Harvest Billing Widget from the Azure DevOps Marketplace.
 2. **Add to Dashboard**: Drag and drop the widget onto your desired dashboard.
 3. **Enter Configuration Details**: Provide your Harvest Account ID and Authorization Token to enable data fetching.
-4. **Customize Display Options**: Select your preferred display mode to visualize the data effectively.
+4. **Customize Display Options**: Select your preferred display mode, widget title, and widget size to visualize the data effectively.
 
 ## Usage
 
