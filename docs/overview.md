@@ -2,7 +2,7 @@
 
 The Harvest Billing Widget is an Azure DevOps dashboard tool that visualizes billable, internal (non-billable), and R&D hours logged through the Harvest app. This widget helps teams efficiently track and manage time spent on various project categories.
 
-![Pie Chart](https://github.com/BogdanBrat/DevOpsWidgetHarvestHours/blob/main/docs/pie-chart.png)
+![Pie Chart](https://raw.githubusercontent.com/BogdanBrat/DevOpsWidgetHarvestHours/main/docs/pie-chart.png)
 
 ## Features
 
@@ -20,7 +20,7 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 - **Widget Title**: Customize the title displayed on the widget to suit your needs.
 - **Widget Size**: Adjust the size of the widget to fit your dashboard layout.
 
-![Widget Configuration](https://github.com/BogdanBrat/DevOpsWidgetHarvestHours/blob/main/docs/widget-configuration.png)
+![Widget Configuration](https://raw.githubusercontent.com/BogdanBrat/DevOpsWidgetHarvestHours/main/docs/widget-configuration.png)
 
 ### Obtaining Harvest Account ID and Authorization Token
 
@@ -31,7 +31,7 @@ To get the necessary credentials:
 3. **Step 3**: Navigate to "Settings" -> "Security" -> "Go to Harvest ID security settings" -> "Developers".
 4. **Step 4**: Click "Create new personal access token" or use an existing token. Copy the generated token and account ID and store them securely.
 
-   ![Security Settings](https://github.com/BogdanBrat/DevOpsWidgetHarvestHours/blob/main/docs/security-settings.png)
+![Security Settings](https://raw.githubusercontent.com/BogdanBrat/DevOpsWidgetHarvestHours/main/docs/security-settings.png)
 
 ## Installation and Setup
 
