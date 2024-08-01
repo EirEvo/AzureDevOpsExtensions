@@ -35,9 +35,10 @@ To get the necessary credentials:
 2. **Add to Dashboard**: Drag and drop the widget onto your desired dashboard.
 3. **Enter Configuration Details**: Provide your Harvest Account ID and Authorization Token to enable data fetching.
 4. **Customize Display Options**: Select your preferred display mode, widget title, and widget size to visualize the data effectively.
+5. **Customize Display**: Set your display preferences, widget dimensions, and optionally customize the R&D filter 
 
 ## Usage
 
 After configuration, the widget provides a real-time breakdown of hours spent on different types of work. This allows teams and managers to monitor resource utilization and focus, ensuring that project hours are appropriately categorized and tracked.
 
-For further assistance or detailed documentation, please visit [Harvest Billing Widget Documentation](https://github.com/BogdanBrat/DevOpsWidgetHarvestHours).
+For further assistance or detailed documentation, please visit [Harvest Billing Widget Documentation](https://github.com/EirEvo/AzureDevOpsExtensions).

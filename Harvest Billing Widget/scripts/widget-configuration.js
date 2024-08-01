@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
         VSS.register("HarvestHoursWidget.Configuration", function () {
             var $harvestAccountId = document.getElementById("harvestAccountId");
             var $authToken = document.getElementById("authToken");
+            var $RnDFilter = document.getElementById("RnDFilter");
             var $displayMode = document.getElementById("displayMode");
             var $title = document.getElementById("title");
             var $width = document.getElementById("width");
@@ -18,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
             function validateField(field) {
                 if (field) {
                     var error = field.nextElementSibling;
-                    if (field.value.trim() === "") {
+                    if (field.value.trim() === "" && (field === $harvestAccountId || field === $authToken)) {
                         if (error) error.style.visibility = "visible";
                     } else {
                         if (error) error.style.visibility = "hidden";
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     data: JSON.stringify({
                         harvestAccountId: $harvestAccountId ? $harvestAccountId.value.trim() : "",
                         authToken: $authToken ? $authToken.value.trim() : "",
+                        RnDFilter: $RnDFilter ? $RnDFilter.value.trim() : "R&D", // Default to "R&D"
                         displayMode: $displayMode ? $displayMode.value : "",
                         title: $title ? $title.value.trim() : "",
                         width: $width ? $width.value : "",
@@ -38,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     })
                 };
 
-                // Переконайтеся, що context не undefined і має метод notify
                 if (context && typeof context.notify === 'function') {
                     context.notify(WidgetHelpers.WidgetEvent.ConfigurationChange, WidgetHelpers.WidgetEvent.Args(customSettings));
                 } else {
@@ -47,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             function bindEvents(context) {
-                var fields = [$harvestAccountId, $authToken, $displayMode, $title, $width, $height];
+                var fields = [$harvestAccountId, $authToken, $RnDFilter, $displayMode, $title, $width, $height];
                 fields.forEach(function(field) {
                     if (field) {
                         field.addEventListener("input", function() {
@@ -69,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     var settings = JSON.parse(widgetSettings.customSettings.data || "{}");
                     if ($harvestAccountId) $harvestAccountId.value = settings.harvestAccountId || "";
                     if ($authToken) $authToken.value = settings.authToken || "";
+                    if ($RnDFilter) $RnDFilter.value = settings.RnDFilter || "R&D"; // Default to "R&D"
                     if ($displayMode) $displayMode.value = settings.displayMode || "hours";
                     if ($title) $title.value = settings.title || "";
                     if ($width) $width.value = settings.width || "";
@@ -76,14 +78,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
                     validateField($harvestAccountId);
                     validateField($authToken);
+                    validateField($RnDFilter);
                     validateField($title);
                     validateField($width);
                     validateField($height);
 
-                    VSS.resize(); // Adjust the size of the configuration pane
+                    VSS.resize();
 
                     bindEvents(widgetConfigurationContext);
-                    notifyConfigurationChange(widgetConfigurationContext); // Notify initial state
+                    notifyConfigurationChange(widgetConfigurationContext);
 
                     return WidgetHelpers.WidgetStatusHelper.Success();
                 },
@@ -99,6 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         data: JSON.stringify({
                             harvestAccountId: $harvestAccountId ? $harvestAccountId.value.trim() : "",
                             authToken: $authToken ? $authToken.value.trim() : "",
+                            RnDFilter: $RnDFilter ? $RnDFilter.value.trim() : "R&D", // Default to "R&D"
                             displayMode: $displayMode ? $displayMode.value : "",
                             title: $title ? $title.value.trim() : "",
                             width: $width ? $width.value : "",

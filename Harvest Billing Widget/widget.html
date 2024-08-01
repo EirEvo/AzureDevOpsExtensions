@@ -45,6 +45,7 @@
                         var authToken = settings.authToken;
                         var widgetTitle = widgetSettings.name || "Billable/Non-billable Hours";
                         var displayMode = settings.displayMode || "hours";
+                        var filterKeyword = settings.RnDFilter || "R&D";
 
                         if (!harvestAccountId || !authToken) {
                             console.error("Harvest Account ID or Authorization token is missing.");
@@ -74,7 +75,7 @@
                             },
                             success: function (data) {
                                 data.time_entries.forEach(function (entry) {
-                                    if (entry.project && entry.project.code && entry.project.code.includes("R&D")) {
+                                    if (entry.project && entry.project.code && entry.project.code.includes(filterKeyword)) {
                                         rAndDHours += entry.hours;
                                     } else if (entry.billable) {
                                         billableHours += entry.hours;
@@ -89,10 +90,10 @@
                                 var chart = new Chart(ctx, {
                                     type: 'doughnut',
                                     data: {
-                                        labels: ['Internal', 'Billable', 'R&D'],
+                                        labels: ['Internal', 'Billable', filterKeyword],
                                         datasets: [{
                                             data: [nonBillableHours, billableHours, rAndDHours],
-                                            backgroundColor: ['#4ea72e', '#e97132', '#0f9ed5']
+                                            backgroundColor: ['#ec0bb7', '#852d9d', '#76f5ff']
                                         }]
                                     },
                                     options: {

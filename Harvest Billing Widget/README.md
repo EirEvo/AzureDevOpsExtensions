@@ -46,6 +46,7 @@ To configure the widget, click on the gear icon in the widget's header. Configur
 2. **Add to Dashboard**: Drag and drop the widget onto your dashboard.
 3. **Configure**: Enter your Harvest Account ID and Authorization Token.
 4. **Customize Display**: Set your display preferences and widget dimensions.
+5. **Customize Display**: Set your display preferences, widget dimensions, and optionally customize the R&D filter term.
 
 ## License
 
