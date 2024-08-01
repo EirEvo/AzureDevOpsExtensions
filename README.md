@@ -29,16 +29,12 @@ To configure the widget, click on the gear icon in the widget's header. Configur
 - **Widget Title**: Customize the title displayed on the widget.
 - **Widget Size**: Adjust the widget size to fit your dashboard layout.
 
-![Widget Configuration](https://raw.githubusercontent.com/BogdanBrat/DevOpsWidgetHarvestHours/main/docs/widget-configuration.png)
-
 ### Obtaining Harvest Account ID and Authorization Token
 
 1. **Log in to Harvest**: Access your Harvest account.
 2. **Navigate to Profile**: Click your name in the upper right corner and select "My Profile".
 3. **Access Security Settings**: Go to "Settings" -> "Security" -> "Go to Harvest ID security settings" -> "Developers".
 4. **Create or Use Token**: Create a new personal access token or use an existing one. Copy the token and account ID and store them securely.
-
-![Security Settings](https://raw.githubusercontent.com/BogdanBrat/DevOpsWidgetHarvestHours/main/docs/security-settings.png)
 
 ## Installation and Setup
 

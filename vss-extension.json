@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
   "id": "HarvestWidgets",
-  "version": "1.0.7",
+  "version": "1.0.0",
   "name": "Harvest Billing Widget",
   "description": "Displays hours from Harvest, providing detailed insights into time allocation for projects. The hours are categorized into billable hours, 'R&D' (Research & Development), and Internal hours.",
-  "publisher": "EirEvo-AzureDevOpsExtensions",
+  "publisher": "harvest-widget",
   "categories": ["Azure Boards"],
   "tags": [
     "hours",
