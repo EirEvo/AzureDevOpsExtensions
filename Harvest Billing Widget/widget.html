@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="sdk/scripts/VSS.SDK.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <style>
+        .widget {
+            text-align: center;
+            padding: 0.2em;
+        }
+        .title {
+            text-align: center;
+            font-size: 1.0em;
+            margin-bottom: 0.3em;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="widget">
+        <h2 class="title">Billable/Non-billable Hours</h2>
+        <div class="chart-container">
+            <canvas id="hoursChart"></canvas>
+        </div>
+    </div>
+    <script type="text/javascript">
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformStyles: true
+        });
+
+        VSS.require(["TFS/Dashboards/WidgetHelpers"], function (WidgetHelpers) {
+            WidgetHelpers.IncludeWidgetStyles();
+            VSS.register("HarvestHoursWidget", function () {
+                return {
+                    load: function (widgetSettings) {
+                        var settings = JSON.parse(widgetSettings.customSettings.data || "{}");
+                        var harvestAccountId = settings.harvestAccountId;
+                        var authToken = settings.authToken;
+                        var widgetTitle = widgetSettings.name || "Billable/Non-billable Hours";
+                        var displayMode = settings.displayMode || "hours";
+
+                        if (!harvestAccountId || !authToken) {
+                            console.error("Harvest Account ID or Authorization token is missing.");
+                            return WidgetHelpers.WidgetStatusHelper.Failure("Configuration is missing.");
+                        }
+
+                        // Set the widget title
+                        document.querySelector('.title').textContent = widgetTitle;
+
+                        var billableHours = 0;
+                        var nonBillableHours = 0;
+                        var rAndDHours = 0;
+
+                        var currentDate = new Date();
+                        var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split('T')[0];
+                        var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split('T')[0];
+
+                        var harvestApiUrl = `https://api.harvestapp.com/v2/time_entries?from=${startDate}&to=${endDate}`;
+
+                        $.ajax({
+                            url: harvestApiUrl,
+                            method: 'GET',
+                            headers: {
+                                'Authorization': `Bearer ${authToken}`,
+                                'Harvest-Account-Id': harvestAccountId,
+                                'User-Agent': 'YourApp (yourname@example.com)'
+                            },
+                            success: function (data) {
+                                data.time_entries.forEach(function (entry) {
+                                    if (entry.project && entry.project.code && entry.project.code.includes("R&D")) {
+                                        rAndDHours += entry.hours;
+                                    } else if (entry.billable) {
+                                        billableHours += entry.hours;
+                                    } else {
+                                        nonBillableHours += entry.hours;
+                                    }
+                                });
+
+                                var totalHours = billableHours + nonBillableHours + rAndDHours;
+                                var ctx = document.getElementById('hoursChart').getContext('2d');
+
+                                var chart = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Internal', 'Billable', 'R&D'],
+                                        datasets: [{
+                                            data: [nonBillableHours, billableHours, rAndDHours],
+                                            backgroundColor: ['#4ea72e', '#e97132', '#0f9ed5']
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            legend: {
+                                                display: true,
+                                                position: 'bottom',
+                                                onClick: null // Disable legend interaction
+                                            },
+                                            tooltip: {
+                                                callbacks: {
+                                                    label: function (context) {
+                                                        let value = context.parsed;
+                                                        if (displayMode === "percentage") {
+                                                            let percentage = ((value / totalHours) * 100).toFixed(1);
+                                                            return ` ${percentage}%`;
+                                                        } else {
+                                                            return `${value.toFixed(1)} h`;
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            datalabels: {
+                                                color: '#fff',
+                                                formatter: (value) => {
+                                                    if (displayMode === "percentage") {
+                                                        let percentage = ((value / totalHours) * 100).toFixed(1);
+                                                        return `${percentage}%`;
+                                                    } else {
+                                                        return `${value.toFixed(1)} h`;
+                                                    }
+                                                },
+                                                font: {
+                                                    weight: 'bold',
+                                                    size: 14 // Default size
+                                                }
+                                            }
+                                        }
+                                    },
+                                    plugins: [ChartDataLabels, {
+                                        beforeDraw: function(chart) {
+                                            var width = chart.width,
+                                                height = chart.height,
+                                                ctx = chart.ctx;
+                                            ctx.restore();
+                                            var fontSize = (height / 200).toFixed(2);
+                                            ctx.font = fontSize + "em sans-serif";
+                                            ctx.textBaseline = "middle";
+                                            var text = totalHours.toFixed(1) + ' h',
+                                                textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                                textY = height / 2 - 20;
+                                            ctx.fillText(text, textX, textY);
+
+                                            ctx.font = (fontSize / 1.5) + "em sans-serif";
+                                            var subtext = "Total Hours",
+                                                subtextX = Math.round((width - ctx.measureText(subtext).width) / 2);
+                                            ctx.fillText(subtext, subtextX, textY + 20);
+                                            ctx.save();
+                                        }
+                                    }]
+                                });
+
+                                // Adjust chart size based on widget size
+                                VSS.resize();
+                                adjustChartSize(chart, widgetSettings.size);
+                            },
+                            error: function (error) {
+                                console.error("Error fetching data from Harvest", error);
+                            }
+                        });
+
+                        return WidgetHelpers.WidgetStatusHelper.Success();
+                    }
+                }
+            });
+            VSS.notifyLoadSucceeded();
+        });
+
+        function adjustChartSize(chart, size) {
+            var widgetContainer = document.querySelector('.chart-container');
+            var title = document.querySelector('.title');
+            var chartData = chart.data.datasets[0];
+
+            var width = widgetContainer.clientWidth;
+            var height = widgetContainer.clientHeight;
+
+            if (size.rowSpan === 2 || size.columnSpan === 2) {
+                title.style.fontSize = "1.0em";
+                chart.options.plugins.datalabels.font.size = 12;
+                widgetContainer.style.maxHeight = "280px";
+            } else if (size.rowSpan === 3 && size.columnSpan === 3) {
+                title.style.fontSize = "1.2em";
+                chart.options.plugins.datalabels.font.size = 16;
+                widgetContainer.style.maxHeight = "440px";
+            } else {
+                title.style.fontSize = "1.0em";
+                chart.options.plugins.datalabels.font.size = 12;
+                widgetContainer.style.maxHeight = "320px";
+            }
+            chart.update();
+        }
+    </script>
+</body>
+</html>
