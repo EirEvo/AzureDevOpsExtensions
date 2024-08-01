@@ -24,10 +24,10 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 
 To get the necessary credentials:
 
-1. **Step 1**: Log in to your Harvest account.
-2. **Step 2**: Go to your profile by clicking your name in the upper right corner and select "My Profile".
-3. **Step 3**: Navigate to "Settings" -> "Security" -> "Go to Harvest ID security settings" -> "Developers".
-4. **Step 4**: Click "Create new personal access token" or use an existing token. Copy the generated token and account ID and store them securely.
+1. Log in to your Harvest account.
+2. Go to your profile by clicking your name in the upper right corner and select `My Profile`.
+3. Navigate to `Settings` > `Security` > `Go to Harvest ID security settings` > `Developers`.
+4. Click `Create new personal access token` or use an existing token. Copy the generated token and account ID and store them securely.
 
 ## Installation and Setup
 
