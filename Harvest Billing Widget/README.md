@@ -1,7 +1,3 @@
-### Harvest Billing Widget Developer Guide
-
----
-
 # Harvest Billing Widget Developer Guide
 
 This guide provides developers with detailed instructions on how to integrate, customize, and publicly deploy the **Harvest Billing Widget** for Azure DevOps dashboards. The widget utilizes the Azure DevOps SDK and Harvest API to visually represent billable, non-billable, and R&D hours in a customizable chart. All source code and project details can be found in the [EirEvo/AzureDevOpsExtensions GitHub repository](https://github.com/EirEvo/AzureDevOpsExtensions).
@@ -47,6 +43,7 @@ The widget project is structured as follows:
 harvest-billing-widget/
 │
 ├── docs/                         # Documentation and images
+│   └── overview.md               # Overview documentation
 ├── img/                          # Widget images (e.g., logo, preview)
 ├── scripts/                      # Custom JavaScript files for the widget
 │   └── widget-configuration.js   # Handles widget configuration logic
@@ -310,7 +307,16 @@ After publishing the widget, you can add it to any Azure DevOps dashboard:
 ## Making the Widget Public
 To make your widget available to everyone on the Azure DevOps Marketplace:
 
-Go to your extension's page in the Azure DevOps Marketplace.
-Under the Visibility section, select Public.
-Submit your extension for approval by Microsoft. The approval process may take a few days.
-Once approved, your widget will be available to all Azure DevOps users via the Marketplace.
+1. Go to your extension's page in the Azure DevOps Marketplace.
+2. Click on Publish.
+3. Once approved, your widget will be automatically made public and available to all Azure DevOps users via the Marketplace.
+
+**Important:** If you intend to keep the extension private, do **not** add the snippet code:
+
+```bash
+"galleryFlags": [
+    "Preview",
+    "Public"
+  ]
+```
+Instead, you can share the extension with your organization directly within the Marketplace by selecting the **Share/Unshare** option and choosing your organization.
