@@ -9,6 +9,8 @@ The Harvest Billing Widget is an Azure DevOps dashboard tool that visualizes bil
 - **Billable Hours**: Displays hours that are chargeable to clients or projects, providing insight into revenue-generating activities.
 - **Internal Hours**: Tracks hours dedicated to internal tasks such as meetings, training, and administration, crucial for understanding resource allocation.
 - **R&D Hours**: Captures hours for research and development projects, identified by a project code containing "R&D", regardless of whether these hours are billable or internal.
+- **Customizable Sector Colors**: Allows you to select custom colors for the billable, internal, and R&D sectors of the pie chart, enabling better visual alignment with your dashboard's theme.
+- **Customizable Sector Labels**: Provides the option to rename the labels for the billable, internal, and R&D sectors to match your organization's terminology.
 
 ## Configuration
 
@@ -19,6 +21,8 @@ To configure the widget, click on the gear icon in the widget's header. You'll n
 - **Display Mode**: Choose between displaying data as a percentage or in absolute hours.
 - **Widget Title**: Customize the title displayed on the widget to suit your needs.
 - **Widget Size**: Adjust the size of the widget to fit your dashboard layout.
+- **Sector Colors**: Select your preferred colors for the billable, internal, and R&D sectors of the pie chart.
+- **Sector Labels**: Customize the labels for the billable, internal, and R&D sectors according to your preference.
 
 ### Obtaining Harvest Account ID and Authorization Token
 
@@ -31,11 +35,11 @@ To get the necessary credentials:
 
 ## Installation and Setup
 
-1. **Install the Widget**: Download and install the Harvest Billing Widget from the Azure DevOps Marketplace.
+1. **Install the Widget**: Find and install the Harvest Billing Widget from the Azure DevOps Marketplace.
 2. **Add to Dashboard**: Drag and drop the widget onto your desired dashboard.
 3. **Enter Configuration Details**: Provide your Harvest Account ID and Authorization Token to enable data fetching.
-4. **Customize Display Options**: Select your preferred display mode, widget title, and widget size to visualize the data effectively.
-5. **Customize Display**: Set your display preferences, widget dimensions, and optionally customize the R&D filter 
+4. **Customize Display Options**: Select your preferred display mode, widget title, widget size, sector colors, and sector labels to visualize the data effectively.
+5. **Customize Display**: Set your display preferences, widget dimensions, and optionally customize the R&D filter.
 
 ## Usage
 

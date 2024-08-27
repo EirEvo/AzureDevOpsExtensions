@@ -10,11 +10,14 @@ document.addEventListener("DOMContentLoaded", function() {
         VSS.register("HarvestHoursWidget.Configuration", function () {
             var $harvestAccountId = document.getElementById("harvestAccountId");
             var $authToken = document.getElementById("authToken");
-            var $RnDFilter = document.getElementById("RnDFilter");
+            var $rndFilter = document.getElementById("rndFilter"); // R&D Filter Field
             var $displayMode = document.getElementById("displayMode");
-            var $title = document.getElementById("title");
-            var $width = document.getElementById("width");
-            var $height = document.getElementById("height");
+            var $billableLabel = document.getElementById("billableLabel");
+            var $internalLabel = document.getElementById("internalLabel");
+            var $rndLabel = document.getElementById("rndLabel"); // R&D Label Field
+            var $billableColor = document.getElementById("billableColor");
+            var $internalColor = document.getElementById("internalColor");
+            var $rndColor = document.getElementById("rndColor");
 
             function validateField(field) {
                 if (field) {
@@ -32,13 +35,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     data: JSON.stringify({
                         harvestAccountId: $harvestAccountId ? $harvestAccountId.value.trim() : "",
                         authToken: $authToken ? $authToken.value.trim() : "",
-                        RnDFilter: $RnDFilter ? $RnDFilter.value.trim() : "R&D", // Default to "R&D"
+                        rndFilter: $rndFilter ? $rndFilter.value.trim() : "R&D", // R&D Filter
                         displayMode: $displayMode ? $displayMode.value : "",
-                        title: $title ? $title.value.trim() : "",
-                        width: $width ? $width.value : "",
-                        height: $height ? $height.value : ""
+                        billableLabel: $billableLabel ? $billableLabel.value.trim() : "Billable",
+                        internalLabel: $internalLabel ? $internalLabel.value.trim() : "Internal",
+                        rndLabel: $rndLabel ? $rndLabel.value.trim() : "R&D", // R&D Label
+                        billableColor: $billableColor ? $billableColor.value : "#852d9d",
+                        internalColor: $internalColor ? $internalColor.value : "#ec0bb7",
+                        rndColor: $rndColor ? $rndColor.value : "#76f5ff"
                     })
                 };
+
+                console.log('Custom Settings:', customSettings); // Debugging output
 
                 if (context && typeof context.notify === 'function') {
                     context.notify(WidgetHelpers.WidgetEvent.ConfigurationChange, WidgetHelpers.WidgetEvent.Args(customSettings));
@@ -48,7 +56,19 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             function bindEvents(context) {
-                var fields = [$harvestAccountId, $authToken, $RnDFilter, $displayMode, $title, $width, $height];
+                var fields = [
+                    $harvestAccountId, 
+                    $authToken, 
+                    $rndFilter,  // R&D Filter
+                    $displayMode, 
+                    $billableLabel, 
+                    $internalLabel, 
+                    $rndLabel,  // R&D Label
+                    $billableColor, 
+                    $internalColor, 
+                    $rndColor
+                ];
+
                 fields.forEach(function(field) {
                     if (field) {
                         field.addEventListener("input", function() {
@@ -70,18 +90,24 @@ document.addEventListener("DOMContentLoaded", function() {
                     var settings = JSON.parse(widgetSettings.customSettings.data || "{}");
                     if ($harvestAccountId) $harvestAccountId.value = settings.harvestAccountId || "";
                     if ($authToken) $authToken.value = settings.authToken || "";
-                    if ($RnDFilter) $RnDFilter.value = settings.RnDFilter || "R&D"; // Default to "R&D"
+                    if ($rndFilter) $rndFilter.value = settings.rndFilter || "R&D"; // R&D Filter
                     if ($displayMode) $displayMode.value = settings.displayMode || "hours";
-                    if ($title) $title.value = settings.title || "";
-                    if ($width) $width.value = settings.width || "";
-                    if ($height) $height.value = settings.height || "";
+                    if ($billableLabel) $billableLabel.value = settings.billableLabel || "Billable";
+                    if ($internalLabel) $internalLabel.value = settings.internalLabel || "Internal";
+                    if ($rndLabel) $rndLabel.value = settings.rndLabel || "R&D"; // R&D Label
+                    if ($billableColor) $billableColor.value = settings.billableColor || "#852d9d";
+                    if ($internalColor) $internalColor.value = settings.internalColor || "#ec0bb7";
+                    if ($rndColor) $rndColor.value = settings.rndColor || "#76f5ff";
 
                     validateField($harvestAccountId);
                     validateField($authToken);
-                    validateField($RnDFilter);
-                    validateField($title);
-                    validateField($width);
-                    validateField($height);
+                    validateField($rndFilter);  // R&D Filter
+                    validateField($billableLabel);
+                    validateField($internalLabel);
+                    validateField($rndLabel);  // R&D Label
+                    validateField($billableColor);
+                    validateField($internalColor);
+                    validateField($rndColor);
 
                     VSS.resize();
 
@@ -102,13 +128,18 @@ document.addEventListener("DOMContentLoaded", function() {
                         data: JSON.stringify({
                             harvestAccountId: $harvestAccountId ? $harvestAccountId.value.trim() : "",
                             authToken: $authToken ? $authToken.value.trim() : "",
-                            RnDFilter: $RnDFilter ? $RnDFilter.value.trim() : "R&D", // Default to "R&D"
+                            rndFilter: $rndFilter ? $rndFilter.value.trim() : "R&D", // R&D Filter
                             displayMode: $displayMode ? $displayMode.value : "",
-                            title: $title ? $title.value.trim() : "",
-                            width: $width ? $width.value : "",
-                            height: $height ? $height.value : ""
+                            billableLabel: $billableLabel ? $billableLabel.value.trim() : "Billable",
+                            internalLabel: $internalLabel ? $internalLabel.value.trim() : "Internal",
+                            rndLabel: $rndLabel ? $rndLabel.value.trim() : "R&D", // R&D Label
+                            billableColor: $billableColor ? $billableColor.value : "#852d9d",
+                            internalColor: $internalColor ? $internalColor.value : "#ec0bb7",
+                            rndColor: $rndColor ? $rndColor.value : "#76f5ff"
                         })
                     };
+
+                    console.log('Saving Settings:', customSettings); // Debugging output
 
                     return WidgetHelpers.WidgetConfigurationSave.Valid(customSettings);
                 }

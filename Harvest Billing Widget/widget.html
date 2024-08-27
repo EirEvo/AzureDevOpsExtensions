@@ -30,23 +30,35 @@
         </div>
     </div>
     <script type="text/javascript">
+        // Initialize VSS SDK
         VSS.init({
             explicitNotifyLoaded: true,
             usePlatformStyles: true
         });
 
+        // Load required modules from TFS/Dashboards
         VSS.require(["TFS/Dashboards/WidgetHelpers"], function (WidgetHelpers) {
             WidgetHelpers.IncludeWidgetStyles();
             VSS.register("HarvestHoursWidget", function () {
                 return {
                     load: function (widgetSettings) {
+                        // Parse custom settings
                         var settings = JSON.parse(widgetSettings.customSettings.data || "{}");
                         var harvestAccountId = settings.harvestAccountId;
                         var authToken = settings.authToken;
                         var widgetTitle = widgetSettings.name || "Billable/Non-billable Hours";
                         var displayMode = settings.displayMode || "hours";
-                        var filterKeyword = settings.RnDFilter || "R&D";
+                        var filterKeyword = settings.rndFilter || "R&D"; // This controls the filter for project codes
+                        var billableLabel = settings.billableLabel || "Billable";
+                        var internalLabel = settings.internalLabel || "Internal";
+                        var rndLabel = settings.rndLabel || "R&D"; // This controls the label name on the chart
 
+                        // Get the colors from the settings or use default values
+                        var billableColor = settings.billableColor || "#852d9d";
+                        var internalColor = settings.internalColor || "#ec0bb7";
+                        var rndColor = settings.rndColor || "#76f5ff";
+
+                        // Ensure necessary credentials are available
                         if (!harvestAccountId || !authToken) {
                             console.error("Harvest Account ID or Authorization token is missing.");
                             return WidgetHelpers.WidgetStatusHelper.Failure("Configuration is missing.");
@@ -55,16 +67,20 @@
                         // Set the widget title
                         document.querySelector('.title').textContent = widgetTitle;
 
+                        // Initialize hour counters
                         var billableHours = 0;
                         var nonBillableHours = 0;
                         var rAndDHours = 0;
 
+                        // Calculate date range (start and end of the current month)
                         var currentDate = new Date();
                         var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split('T')[0];
                         var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split('T')[0];
 
+                        // Harvest API URL to fetch time entries
                         var harvestApiUrl = `https://api.harvestapp.com/v2/time_entries?from=${startDate}&to=${endDate}`;
 
+                        // Fetch data from Harvest API
                         $.ajax({
                             url: harvestApiUrl,
                             method: 'GET',
@@ -74,7 +90,11 @@
                                 'User-Agent': 'YourApp (yourname@example.com)'
                             },
                             success: function (data) {
+                                console.log("Time Entries:", data.time_entries);
+                                // Process each time entry
                                 data.time_entries.forEach(function (entry) {
+                                    console.log("Project Code:", entry.project.code);
+                                    // Apply R&D filter to calculate R&D hours
                                     if (entry.project && entry.project.code && entry.project.code.includes(filterKeyword)) {
                                         rAndDHours += entry.hours;
                                     } else if (entry.billable) {
@@ -84,16 +104,18 @@
                                     }
                                 });
 
+                                // Calculate total hours
                                 var totalHours = billableHours + nonBillableHours + rAndDHours;
                                 var ctx = document.getElementById('hoursChart').getContext('2d');
 
+                                // Create the chart
                                 var chart = new Chart(ctx, {
                                     type: 'doughnut',
                                     data: {
-                                        labels: ['Internal', 'Billable', filterKeyword],
+                                        labels: [internalLabel, billableLabel, rndLabel], // Use rndLabel for the R&D segment name
                                         datasets: [{
                                             data: [nonBillableHours, billableHours, rAndDHours],
-                                            backgroundColor: ['#ec0bb7', '#852d9d', '#76f5ff']
+                                            backgroundColor: [internalColor, billableColor, rndColor]
                                         }]
                                     },
                                     options: {
@@ -174,6 +196,7 @@
             VSS.notifyLoadSucceeded();
         });
 
+        // Function to adjust chart size based on widget size
         function adjustChartSize(chart, size) {
             var widgetContainer = document.querySelector('.chart-container');
             var title = document.querySelector('.title');
