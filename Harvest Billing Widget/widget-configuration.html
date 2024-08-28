@@ -185,6 +185,20 @@
             <input type="text" id="rndFilter" placeholder="R&D" />
         </div>
 
+        <!-- Time Period Selection -->
+        <div class="form-group">
+            <label for="timePeriod">Select Time Period
+                <span class="info-icon">&#9432
+                    <span class="tooltip">Choose the time period over which to calculate and display hours.</span>
+                </span>
+            </label>
+            <select id="timePeriod">
+                <option value="7">Last 7 Days</option>
+                <option value="14">Last 14 Days</option>
+                <option value="30">Last 30 Days</option>
+            </select>
+        </div>
+
         <!-- Other settings... -->
         <div class="form-group">
             <label for="harvestAccountId">Harvest Account ID *
@@ -223,6 +237,7 @@
                 <option value="percentage">Percentage</option>
             </select>
         </div>
+
         <div class="end-spacing"></div>
     </div>
     <script>

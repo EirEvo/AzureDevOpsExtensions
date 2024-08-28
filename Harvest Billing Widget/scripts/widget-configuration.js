@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var $billableColor = document.getElementById("billableColor");
             var $internalColor = document.getElementById("internalColor");
             var $rndColor = document.getElementById("rndColor");
+            var $timePeriod = document.getElementById("timePeriod"); // Time Period Field
 
             function validateField(field) {
                 if (field) {
@@ -42,7 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         rndLabel: $rndLabel ? $rndLabel.value.trim() : "R&D", // R&D Label
                         billableColor: $billableColor ? $billableColor.value : "#852d9d",
                         internalColor: $internalColor ? $internalColor.value : "#ec0bb7",
-                        rndColor: $rndColor ? $rndColor.value : "#76f5ff"
+                        rndColor: $rndColor ? $rndColor.value : "#76f5ff",
+                        timePeriod: $timePeriod ? $timePeriod.value : "7" // Time Period
                     })
                 };
 
@@ -66,7 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     $rndLabel,  // R&D Label
                     $billableColor, 
                     $internalColor, 
-                    $rndColor
+                    $rndColor,
+                    $timePeriod // Time Period
                 ];
 
                 fields.forEach(function(field) {
@@ -78,9 +81,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 });
 
-                if ($displayMode) {
-                    $displayMode.addEventListener("change", function() {
-                        notifyConfigurationChange(context);
+                if ($displayMode || $timePeriod) {
+                    [$displayMode, $timePeriod].forEach(function(field) {
+                        field.addEventListener("change", function() {
+                            notifyConfigurationChange(context);
+                        });
                     });
                 }
             }
@@ -98,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if ($billableColor) $billableColor.value = settings.billableColor || "#852d9d";
                     if ($internalColor) $internalColor.value = settings.internalColor || "#ec0bb7";
                     if ($rndColor) $rndColor.value = settings.rndColor || "#76f5ff";
+                    if ($timePeriod) $timePeriod.value = settings.timePeriod || "7"; // Time Period
 
                     validateField($harvestAccountId);
                     validateField($authToken);
@@ -108,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     validateField($billableColor);
                     validateField($internalColor);
                     validateField($rndColor);
+                    validateField($timePeriod); // Time Period
 
                     VSS.resize();
 
@@ -135,7 +142,8 @@ document.addEventListener("DOMContentLoaded", function() {
                             rndLabel: $rndLabel ? $rndLabel.value.trim() : "R&D", // R&D Label
                             billableColor: $billableColor ? $billableColor.value : "#852d9d",
                             internalColor: $internalColor ? $internalColor.value : "#ec0bb7",
-                            rndColor: $rndColor ? $rndColor.value : "#76f5ff"
+                            rndColor: $rndColor ? $rndColor.value : "#76f5ff",
+                            timePeriod: $timePeriod ? $timePeriod.value : "7" // Time Period
                         })
                     };
 

@@ -52,6 +52,7 @@
                         var billableLabel = settings.billableLabel || "Billable";
                         var internalLabel = settings.internalLabel || "Internal";
                         var rndLabel = settings.rndLabel || "R&D"; // This controls the label name on the chart
+                        var timePeriod = settings.timePeriod || "7"; // Default to 7 days if not set
 
                         // Get the colors from the settings or use default values
                         var billableColor = settings.billableColor || "#852d9d";
@@ -72,10 +73,16 @@
                         var nonBillableHours = 0;
                         var rAndDHours = 0;
 
-                        // Calculate date range (start and end of the current month)
-                        var currentDate = new Date();
-                        var startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split('T')[0];
-                        var endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split('T')[0];
+                        // Function to calculate date range based on selected period
+                        function calculateDateRange(period) {
+                            var currentDate = new Date();
+                            var startDate = new Date(currentDate.setDate(currentDate.getDate() - period + 1)).toISOString().split('T')[0];
+                            var endDate = new Date().toISOString().split('T')[0];
+                            return { startDate, endDate };
+                        }
+
+                        // Calculate date range based on the time period selected in configuration
+                        var { startDate, endDate } = calculateDateRange(parseInt(timePeriod, 10));
 
                         // Harvest API URL to fetch time entries
                         var harvestApiUrl = `https://api.harvestapp.com/v2/time_entries?from=${startDate}&to=${endDate}`;
@@ -112,7 +119,7 @@
                                 var chart = new Chart(ctx, {
                                     type: 'doughnut',
                                     data: {
-                                        labels: [internalLabel, billableLabel, rndLabel], // Use rndLabel for the R&D segment name
+                                        labels: [internalLabel, billableLabel, rndLabel],
                                         datasets: [{
                                             data: [nonBillableHours, billableHours, rAndDHours],
                                             backgroundColor: [internalColor, billableColor, rndColor]
